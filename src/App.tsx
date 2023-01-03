@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import { LocalInfo } from "./components/LocalInfo/LocalInfo";
+import { Weather } from "./components/Weather/Weather";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface MainWeather {
+  temp: number | undefined;
+  humidity: number | undefined;
+}
+interface WeatherData {
+  main: MainWeather;
 }
 
-export default App;
+const api = {
+  key: process.env.REACT_APP_OPENWEATHER_API,
+  base: "https://api.openweathermap.org/data/2.5/",
+};
+
+const fetchWeather = async () => {
+  try {
+    let data = await fetch(
+      `${api.base}weather?id=4069243&units=imperial&appid=${api.key}`
+    );
+    let weatherData = await data.json();
+    return weatherData;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const App = () => {
+  const [weather, setWeather] = useState<WeatherData | undefined>();
+
+  useEffect(() => {
+    fetchWeather().then((res) => setWeather(res));
+  }, []);
+
+  return (
+    <div>
+      <LocalInfo />
+      <Weather temp={weather?.main?.temp} humidity={weather?.main?.humidity} />
+    </div>
+  );
+};
