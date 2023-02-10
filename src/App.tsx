@@ -19,15 +19,15 @@ const weatherApi = {
 };
 
 const panelStyles = {
-  display: "flex",
-  width: "50%",
+  width: "100%",
   height: "100%",
+  cssFloat: "left",
 };
 
 const getFollowedStreams = async (token: string) => {
   try {
     let data = await fetch(
-      "https://api.twitch.tv/helix/streams/followed?user_id=70796913",
+      `https://api.twitch.tv/helix/streams/followed?user_id=${process.env.REACT_APP_TWITCH_USER_ID}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -78,7 +78,12 @@ export const App = () => {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{ display: "flex" }}
+      onClick={() => {
+        window.location.reload();
+      }}
+    >
       <div style={panelStyles}>
         <LocalInfo city={weather?.name} />
         <Weather
@@ -93,5 +98,3 @@ export const App = () => {
     </div>
   );
 };
-
-//http://localhost:3000/?code=133tjlzdjp5k7ot3x508qgzq6xcgnc&scope=user%3Aread%3Afollows
