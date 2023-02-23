@@ -16,7 +16,19 @@ export const LocalInfo = ({ city }: weatherProps) => {
   let dayOfWeek = weekdays[now.getDay()];
 
   return (
-    <div style={{ backgroundColor: "#3498db", color: "white" }}>
+    <div
+      style={{
+        backgroundColor: "#3498db",
+        color: "white",
+        display: "flex",
+        height: "50vh",
+        width: "100vh",
+        paddingLeft: "25px",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <h1>
         {now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
       </h1>

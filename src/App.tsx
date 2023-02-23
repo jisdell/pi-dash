@@ -19,9 +19,9 @@ const weatherApi = {
 };
 
 const panelStyles = {
-  width: "100%",
-  height: "100%",
-  cssFloat: "left",
+  display: "flex",
+  minWidth: "50%",
+  minHeight: "100%",
 };
 
 const getFollowedStreams = async (token: string) => {
@@ -79,7 +79,6 @@ export const App = () => {
 
   return (
     <div
-      style={{ display: "flex" }}
       onClick={() => {
         window.location.reload();
       }}
