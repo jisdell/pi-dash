@@ -26,11 +26,12 @@ export const TwitchStuff = ({ users }: TwitchProps) => {
       <h1>Live:</h1>
       <Grid container spacing={2}>
         {users.map(({ id, user_name }) => (
-          <Grid item xs={3} key={id}>
+          <Grid item xs={3}>
             <Chip
+              key={id}
               label={user_name}
               size="medium"
-              avatar={<Avatar>{user_name.charAt(0)}</Avatar>}
+              avatar={<Avatar src={user_name.charAt(0)} />}
             />
           </Grid>
         ))}

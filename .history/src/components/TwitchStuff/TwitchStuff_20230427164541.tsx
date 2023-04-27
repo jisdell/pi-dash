@@ -2,6 +2,7 @@ import { Avatar, Chip, Grid } from "@mui/material";
 export interface TwitchUser {
   id: string;
   user_name: string;
+  thumbnail_url: string;
 }
 
 interface TwitchProps {
@@ -25,12 +26,13 @@ export const TwitchStuff = ({ users }: TwitchProps) => {
     >
       <h1>Live:</h1>
       <Grid container spacing={2}>
-        {users.map(({ id, user_name }) => (
-          <Grid item xs={3} key={id}>
+        {users.map(({ id, user_name, thumbnail_url }) => (
+          <Grid item xs={3}>
             <Chip
+              key={id}
               label={user_name}
               size="medium"
-              avatar={<Avatar>{user_name.charAt(0)}</Avatar>}
+              avatar={<Avatar src={thumbnail_url} />}
             />
           </Grid>
         ))}
